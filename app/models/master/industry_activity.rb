@@ -2,9 +2,9 @@
 #
 # Table name: industryActivity
 #
-#  typeID     :integer          default("0"), not null, primary key
+#  typeID     :integer          not null, primary key
+#  activityID :integer          not null
 #  time       :integer
-#  activityID :integer          default("0"), not null
 #
 
 class IndustryActivity < ActiveRecord::Base

@@ -6,7 +6,6 @@
 #  activityID     :integer
 #  materialTypeID :integer
 #  quantity       :integer
-#  consume        :integer          default("1")
 #
 
 class IndustryActivityMaterial < ActiveRecord::Base
