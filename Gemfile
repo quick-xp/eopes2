@@ -18,6 +18,8 @@ gem 'unicorn'
 gem 'dotenv-rails'
 # クロスドメイン
 gem 'rack-cors', require: 'rack/cors'
+# Rails5.0.0.beta3必須?
+gem 'listen'
 
 group :development, :test do
   gem 'pry'
