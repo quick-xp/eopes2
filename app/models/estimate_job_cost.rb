@@ -17,6 +17,33 @@
 
 class EstimateJobCost < ActiveRecord::Base
   belongs_to :estimate
+  attr_accessor :blueprint_type_id, :blueprint_runs
+
+  def re_calc_job_cost!(material_list, runs)
+    #SystemCostIndex設定
+    self.system_cost_index =
+      EstimateJobCost.get_system_cost_index(self.region_id, self.solar_system_id)
+
+    #BaseJobCost設定
+    self.base_job_cost = get_base_job_cost(material_list, runs)
+
+    #JobFee設定
+    self.job_fee = get_job_fee
+
+    #FacilityCost設定
+    self.facility_cost = get_facility_cost
+
+    #TotalJobInstallCost設定
+    self.total_job_cost = get_total_job_cost
+  end
+
+  def initialize(blueprint_type_id, blueprint_runs, region_id = "", solar_system_id = "")
+    super()
+    self.blueprint_type_id = blueprint_type_id
+    self.blueprint_runs = blueprint_runs
+    self.region_id = region_id
+    self.solar_system_id = solar_system_id
+  end
 
   #region_id,solar_system_idどちらも指定されていない場合は全Cost_Indexの平均を
   #region_idのみ指定の場合は、Region内のCost_Indexの平均を
@@ -53,49 +80,32 @@ class EstimateJobCost < ActiveRecord::Base
     result
   end
 
-  def re_calc_job_cost!(material_list, runs)
-    #SystemCostIndex設定
-    self.system_cost_index =
-        EstimateJobCost.get_system_cost_index(self.region_id, self.solar_system_id)
-
-    #BaseJobCost設定
-    self.base_job_cost = get_base_job_cost(material_list, runs)
-
-    #JobFee設定
-    self.job_fee = get_job_fee
-
-    #FacilityCost設定
-    self.facility_cost = get_facility_cost
-
-    #TotalJobInstallCost設定
-    self.total_job_cost = get_total_job_cost
-  end
-
   #BaseJobCost計算
-  #Σ(baseQuantity * adjustedPrice)
-  def get_base_job_cost(material_list, runs)
+  #Σ( baseQuantity * adjustedPrice)
+  def base_job_cost
     base_job_cost = 0.0
-    material_list.each do |material|
+    materials = IndustryActivityMaterial.materials_for_production_job(self.blueprint_type_id)
+    materials.each do |material|
       base_job_cost += material.base_quantity * material.adjusted_price
     end
-    base_job_cost * runs
+    base_job_cost * self.blueprint_runs
   end
 
   #JobFee計算
   #system_cost_index * baseJobCost
-  def get_job_fee
+  def job_fee
     self.system_cost_index * self.base_job_cost
   end
 
   #FacilityCost計算
   #JobFee * taxRate / 100
-  def get_facility_cost
+  def facility_cost
     self.job_fee * 10 / 100
   end
 
   #TotalJobCost計算
   #JobFee + FacilityCost
-  def get_total_job_cost
+  def total_job_cost
     self.job_fee + self.facility_cost
   end
 
