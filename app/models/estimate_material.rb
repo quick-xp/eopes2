@@ -27,6 +27,10 @@ class EstimateMaterial < ActiveRecord::Base
     joins(:estimate).merge(Estimate.my_estimate(user_id))
   end
 
+  scope :find_estimates, -> (id) do
+    joins(:estimate).merge(Estimate.where(id: id))
+  end
+
   #material require = max(runs,ceil(round(runs * baseQuantity * materialModifier,2))
   #materialModifire = ME * FacilityModifier
   #FacilityModifire = NPC_STATION:1.0,POS:0.98
