@@ -1,7 +1,8 @@
 class CrestClient
   CREST_API_BASE_URL = 'https://crest-tq.eveonline.com'.freeze
   PUBLIC_CREST_API_BASE = 'https://public-crest.eveonline.com'.freeze
-  INDUSTRY_COST_INDEX_PATH = '/industry/systems/'.freeze
+  INDUSTRY_COST_INDEX_URL = '/industry/systems/'.freeze
+  MARKET_PRICE_URL = '/market/prices/'.freeze
 
   def initialize(token)
     @token = token
@@ -15,7 +16,14 @@ class CrestClient
   end
 
   def get_industry_system
-    path = CREST_API_BASE_URL + INDUSTRY_COST_INDEX_PATH
+    path = CREST_API_BASE_URL + INDUSTRY_COST_INDEX_URL
+    Rails.logger.info("CrestClient Access to #{path}")
+
+    GeneralCrestResponse.parse(get_request_to(path))
+  end
+
+  def get_market_price
+    path = CREST_API_BASE_URL + MARKET_PRICE_URL
     Rails.logger.info("CrestClient Access to #{path}")
 
     GeneralCrestResponse.parse(get_request_to(path))
