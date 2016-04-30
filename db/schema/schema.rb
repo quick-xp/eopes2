@@ -90,7 +90,7 @@ create_table "markets", collate: "utf8_bin", comment: "" do |t|
   t.int "station_id", null: true
   t.int "volume", null: true
   t.tinyint "buy", null: true, limit: 1
-  t.decimal "price", null: true, precision: 10, scale: 0
+  t.decimal "price", null: true, precision: 20, scale: 4
   t.int "duration", null: true
   t.datetime "issued", null: true
   t.datetime "created_at", null: true

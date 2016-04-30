@@ -42,15 +42,18 @@ class EstimateMaterial < ActiveRecord::Base
 
   def self.get_material_list(blueprint_type_id, blueprint_me, blueprint_te, blueprint_runs)
     material_list = Array.new
-    #材料一覧取得
+    # 材料一覧取得
     materials = IndustryActivityMaterial.materials_for_production_job(blueprint_type_id)
+    # Jita Market データ取得
+    self.refresh_jita_market(materials)
+
     materials.each do |m|
       r = EstimateMaterial.new
       r.type_id = m.materialTypeID
       r.base_quantity = m.quantity
       r.require_count = EstimateMaterial.require_material(blueprint_runs, m.quantity, blueprint_me, false)
       r.adjusted_price = MarketPrice.get_adjusted_price(r.type_id)
-      r.jita_average_price = jita_price_list.fetch(m.materialTypeID)
+      r.jita_average_price = EstimateMaterial.jita_lower_price(r.type_id)
       r.jita_total_price = r.jita_average_price * r.require_count
       r.universe_average_price = MarketPrice.get_universe_average_price(r.type_id)
       r.universe_total_price = r.universe_average_price * r.require_count
@@ -63,4 +66,20 @@ class EstimateMaterial < ActiveRecord::Base
     material_list
   end
 
+  def self.jita_lower_price(type_id)
+    Market.where(
+      region_id: "10000002",
+      station_id: "60003760",
+      type_id: type_id)
+      .order(:price)
+      .limit(1)
+  end
+
+  def self.refresh_jita_market(materials)
+    type_id_lists = []
+    materials.each do |m|
+      type_id_lists << m.materialTypeID
+    end
+    Market.refresh_market_parallel("10000002", type_id_lists)
+  end
 end

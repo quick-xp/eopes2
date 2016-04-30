@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer  "station_id"
     t.integer  "volume"
     t.boolean  "buy"
-    t.decimal  "price",      precision: 10
+    t.decimal  "price",      precision: 20, scale: 4
     t.integer  "duration"
     t.datetime "issued"
     t.datetime "created_at"
