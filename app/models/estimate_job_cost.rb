@@ -19,6 +19,10 @@ class EstimateJobCost < ActiveRecord::Base
   belongs_to :estimate
   attr_accessor :blueprint_type_id, :blueprint_runs
 
+  scope :my_estimate, -> (user_id) do
+    joins(:estimate).merge(Estimate.my_estimate(user_id))
+  end
+
   def calc_job_cost!
     #SystemCostIndex設定
     self.system_cost_index =

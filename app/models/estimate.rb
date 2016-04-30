@@ -23,6 +23,10 @@ class Estimate < ActiveRecord::Base
   has_one :estimate_blueprint, :dependent => :destroy
   has_one :estimate_job_cost, :dependent => :destroy
 
+  scope :my_estimate, -> (user_id) do
+    where(user_id: user_id)
+  end
+
   #Production Time算出
   #base * timeModifier * skillModifier * runs
   #timeModifier = TEModifier and Facility Modifier (1.0 for NPC Station, 0.75 for many Pos assembly)
