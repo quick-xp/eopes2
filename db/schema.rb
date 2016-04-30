@@ -92,20 +92,6 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_index "map_jumps", ["from_solar_system_id", "to_solar_system_id"], name: "index_map_jumps_on_from_solar_system_id_and_to_solar_system_id", using: :btree
 
-  create_table "market_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT" do |t|
-    t.integer  "volume"
-    t.boolean  "buy"
-    t.decimal  "price",      precision: 10
-    t.integer  "duration"
-    t.integer  "station_id"
-    t.datetime "issued"
-    t.integer  "market_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "market_details", ["market_id"], name: "index_market_details_on_market_id", using: :btree
-
   create_table "market_prices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT" do |t|
     t.integer  "type_id"
     t.decimal  "adjusted_price", precision: 20, scale: 4
@@ -117,6 +103,12 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "markets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT" do |t|
     t.integer  "type_id"
     t.integer  "region_id"
+    t.integer  "station_id"
+    t.integer  "volume"
+    t.boolean  "buy"
+    t.decimal  "price",      precision: 10
+    t.integer  "duration"
+    t.datetime "issued"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

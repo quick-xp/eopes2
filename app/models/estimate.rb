@@ -13,6 +13,7 @@
 #  material_total_cost :decimal(20, 4)
 #  profit              :decimal(20, 4)
 #  total_volume        :decimal(20, 4)
+#  production_time     :integer
 #  created_at          :datetime
 #  updated_at          :datetime
 #

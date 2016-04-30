@@ -87,23 +87,14 @@ create_table "markets", collate: "utf8_bin", comment: "" do |t|
   t.int "id", primary_key: true, extra: "auto_increment"
   t.int "type_id", null: true
   t.int "region_id", null: true
-  t.datetime "created_at", null: true
-  t.datetime "updated_at", null: true
-end
-
-create_table "market_details", collate: "utf8_bin", comment: "" do |t|
-  t.int "id", primary_key: true, extra: "auto_increment"
+  t.int "station_id", null: true
   t.int "volume", null: true
   t.tinyint "buy", null: true, limit: 1
   t.decimal "price", null: true, precision: 10, scale: 0
   t.int "duration", null: true
-  t.int "station_id", null: true
   t.datetime "issued", null: true
-  t.int "market_id", null: true
   t.datetime "created_at", null: true
   t.datetime "updated_at", null: true
-
-  t.index "market_id", name: "index_market_details_on_market_id"
 end
 
 create_table "market_prices", collate: "utf8_bin", comment: "" do |t|
