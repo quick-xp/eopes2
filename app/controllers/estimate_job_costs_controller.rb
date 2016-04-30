@@ -25,7 +25,7 @@ class EstimateJobCostsController < ApplicationController
   def set_estimate
     @estimate_blueprint = EstimateJobCost
       .my_estimate(get_current_user_id)
-      .find(params[:id])
+      .find_estimate(params[:id])
   end
 
 end

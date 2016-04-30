@@ -23,6 +23,10 @@ class EstimateJobCost < ActiveRecord::Base
     joins(:estimate).merge(Estimate.my_estimate(user_id))
   end
 
+  scope :find_estimate, -> (id) do
+    joins(:estimate).merge(Estimate.find(id: id))
+  end
+
   def calc_job_cost!
     #SystemCostIndex設定
     self.system_cost_index =
