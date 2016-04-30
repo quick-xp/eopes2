@@ -3,8 +3,8 @@ class EstimateBlueprintsController < ApplicationController
   before_action :set_estimate, only: [:show]
 
   def index
-    @estimate = EstimateBlueprint.my_estimate(get_current_user_id).all
-    render json: @estimate.estimate_blueprint
+    @estimate_blueprints = EstimateBlueprint.my_estimate(get_current_user_id).all
+    render json: @estimate_blueprints
   end
 
   def show
