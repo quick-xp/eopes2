@@ -23,7 +23,7 @@ class MarketPrice < ActiveRecord::Base
   end
 
   def self.get_adjusted_price(type_id)
-    price = MarketPrice.where(typeid: type_id).first
+    price = MarketPrice.where(type_id: type_id).first
     if price.nil?
       price = 0.0
     else

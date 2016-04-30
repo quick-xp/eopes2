@@ -65,7 +65,7 @@ class EstimateMaterial < ActiveRecord::Base
       r.jita_total_price = r.jita_average_price * r.require_count
       r.universe_average_price = MarketPrice.get_universe_average_price(r.type_id)
       r.universe_total_price = r.universe_average_price * r.require_count
-      r.volume = InvType.get_type_volume(r.type_id)
+      r.volume = InvType.type_volume(r.type_id)
       r.total_volume = r.volume * r.require_count
       r.price = r.jita_average_price.round(2)
       r.total_price = r.require_count * r.price

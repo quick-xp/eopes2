@@ -13,9 +13,9 @@ class EstimateMaterialsController < ApplicationController
 
   def new
     @estimate_materials = EstimateMaterial.get_material_list(params[:type_id],
-                                                             params[:me],
-                                                             params[:te],
-                                                             params[:runs]
+                                                             params[:me].to_i,
+                                                             params[:te].to_i,
+                                                             params[:runs].to_i
                                                             )
     render json: @estimate_materials
   end

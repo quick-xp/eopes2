@@ -12,10 +12,10 @@ class EstimateJobCostsController < ApplicationController
   end
 
   def new
-    @estimate_job_cost = EstimateJobCost.initialize_blueprint(params[:type_id],
-                                                              params[:runs],
-                                                              params[:region_id],
-                                                              params[:solar_system_id])
+    @estimate_job_cost = EstimateJobCost.new(params[:type_id],
+                                             params[:runs].to_i,
+                                             params[:region_id],
+                                             params[:solar_system_id])
     @estimate_job_cost.calc_job_cost!
     render json: @estimate_job_cost
   end

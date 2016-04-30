@@ -24,15 +24,15 @@ class InvType < ActiveRecord::Base
   self.primary_key = 'typeID'
   establish_connection(:EveMasterDB)
 
-  def type_name(typeID)
+  def self.type_name(typeID)
     InvType.find(typeID).try(:typeName)
   end
 
-  def description(typeID)
+  def self.description(typeID)
     InvType.find(typeID).try(:description)
   end
 
-  def type_volume(typeID)
+  def self.type_volume(typeID)
     InvType.find(typeID).try(:volume)
   end
 

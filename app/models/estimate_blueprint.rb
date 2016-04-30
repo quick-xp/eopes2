@@ -24,11 +24,10 @@ class EstimateBlueprint < ActiveRecord::Base
   end
 
   def initialize_blueprint(type_id)
-    estimate_blueprint = EstimateBlueprint.new
-    estimate_blueprint.type_id = type_id
+    self.type_id = type_id
     #blueprint初期のRun,me,te設定
-    estimate_blueprint.runs = 1
-    estimate_blueprint.me = 10
-    estimate_blueprint.te = 20
+    self.runs = 1
+    self.me = 10
+    self.te = 20
   end
 end

@@ -12,7 +12,8 @@ class EstimateBlueprintsController < ApplicationController
   end
 
   def new
-    @estimate_blueprint = EstimateBlueprint.initialize_blueprint(params[:type_id])
+    @estimate_blueprint = EstimateBlueprint.new
+    @estimate_blueprint.initialize_blueprint(params[:type_id])
     render json: @estimate_blueprint
   end
 
