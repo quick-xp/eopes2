@@ -12,7 +12,7 @@ class IndustryActivity < ActiveRecord::Base
   establish_connection(:EveMasterDB)
   self.primary_key = :typeID
 
-  def self.get_industry
+  def self.manufacture_availables
     IndustryActivity.joins("inner join invTypes on industryActivity.typeID = invTypes.typeID")
                     .where(activityID: 1)
                     .where("invTypes.typeName NOT LIKE '%YC117%'")
