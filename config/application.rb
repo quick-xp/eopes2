@@ -33,6 +33,13 @@ module EOPES2
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
 
+    config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options, :patch, :delete]
+      end
+    end
+
     config.api_only = true
   end
 end
