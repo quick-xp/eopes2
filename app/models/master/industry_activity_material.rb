@@ -14,7 +14,7 @@ class IndustryActivityMaterial < ActiveRecord::Base
   self.primary_key = :typeID,:activityID,:materialTypeID
 
   belongs_to :inv_type, class_name: 'InvType', foreign_key: "typeID"
-  belongs_to :material_inv_type, class_name: 'InvType', foreign_key: "typeID"
+  belongs_to :material_inv_type, class_name: 'InvType', foreign_key: "materialTypeID"
 
   def self.materials_for_production_job(blueprint_type_id)
     activity_materials = IndustryActivityMaterial
