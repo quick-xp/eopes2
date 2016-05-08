@@ -11,6 +11,18 @@ class EstimatesController < ApplicationController
     render json: @estimate
   end
 
+  # 見積もりの初期化
+  def new
+    @estimate_form = Form::Estimate.new
+    @estimate_form.do_estimate_initialize(params[:type_id],
+                                          params[:runs],
+                                          params[:me],
+                                          params[:te],
+                                          params[:region_id],
+                                          params[:solar_system_id])
+    render json: @estimate_form
+  end
+
   private
 
   def set_estimate

@@ -19,7 +19,6 @@ Bundler.require(*Rails.groups)
 module EOPES2
   class Application < Rails::Application
     config.autoload_paths +=%W(#{config.root}/app/models/master)
-    config.autoload_paths +=%W(#{config.root}/app/models/form)
     config.autoload_paths +=%W(#{config.root}/app/models/crest)
     config.autoload_paths +=%W(#{config.root}/lib)
     config.generators do |g|

@@ -12,7 +12,7 @@ class EstimateJobCostsController < ApplicationController
   end
 
   def new
-    @estimate_job_cost = EstimateJobCost.new(params[:type_id],
+    @estimate_job_cost = EstimateJobCost.new.initialize_job_cost(params[:type_id],
                                              params[:runs].to_i,
                                              params[:region_id],
                                              params[:solar_system_id])

@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :estimates
+  resources :estimates do
+    collection do
+      get 'new'
+    end
+  end
+
   resources :estimate_blueprints do
     collection do
       get 'new'

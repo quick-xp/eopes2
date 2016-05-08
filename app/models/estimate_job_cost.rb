@@ -45,8 +45,7 @@ class EstimateJobCost < ActiveRecord::Base
     self.total_job_cost = calc_total_job_cost(self.job_fee, self.facility_cost)
   end
 
-  def initialize(blueprint_type_id, blueprint_runs, region_id = "", solar_system_id = "")
-    super()
+  def initialize_job_cost(blueprint_type_id, blueprint_runs, region_id = "", solar_system_id = "")
     self.blueprint_type_id = blueprint_type_id
     self.blueprint_runs = blueprint_runs
     self.region_id = region_id
