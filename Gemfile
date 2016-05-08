@@ -21,6 +21,8 @@ gem 'dotenv-rails'
 gem 'rack-cors', require: 'rack/cors'
 # Rails5.0.0.beta3必須?
 gem 'listen'
+# 並列処理
+gem 'parallel'
 
 group :development, :test do
   gem 'pry'

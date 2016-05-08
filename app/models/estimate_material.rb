@@ -75,12 +75,13 @@ class EstimateMaterial < ActiveRecord::Base
   end
 
   def self.jita_lower_price(type_id)
-    Market.where(
+    m = Market.where(
       region_id: "10000002",
       station_id: "60003760",
       type_id: type_id)
       .order(:price)
-      .limit(1)
+      .first
+    m.price
   end
 
   def self.refresh_jita_market(materials)

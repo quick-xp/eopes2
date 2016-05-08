@@ -133,6 +133,7 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    parallel (1.6.2)
     parser (2.3.0.7)
       ast (~> 2.2)
     powerpack (0.1.1)
@@ -276,6 +277,7 @@ DEPENDENCIES
   kaminari
   listen
   mysql2 (= 0.3.19)
+  parallel
   pry
   pry-doc
   pry-nav

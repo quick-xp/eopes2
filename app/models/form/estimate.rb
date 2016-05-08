@@ -26,6 +26,10 @@ class Form::Estimate < Estimate
     # blueprint init
     self.estimate_blueprint.initialize_blueprint(type_id)
 
+    # blueprint情報指定なしの場合
+    runs = self.estimate_blueprint.runs if runs == nil
+    me = self.estimate_blueprint.me if me == nil
+    te = self.estimate_blueprint.te if te == nil
     # jobcost init
     self.estimate_job_cost.initialize_job_cost(type_id,
                                                runs.to_i,
