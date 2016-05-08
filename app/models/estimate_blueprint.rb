@@ -30,4 +30,8 @@ class EstimateBlueprint < ActiveRecord::Base
     self.me = 10
     self.te = 20
   end
+
+  def blueprint_product
+    IndustryActivityProduct.product_for_production_job(self.type_id)
+  end
 end
