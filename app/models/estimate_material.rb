@@ -22,6 +22,7 @@
 
 class EstimateMaterial < ActiveRecord::Base
   belongs_to :estimate
+  belongs_to :material_inv_type, class_name: 'InvType', foreign_key: "type_id"
 
   scope :my_estimate, -> (user_id) do
     joins(:estimate).merge(Estimate.my_estimate(user_id))
