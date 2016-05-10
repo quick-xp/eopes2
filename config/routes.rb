@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   # master
   resources :map_regions, only:[:index]
   resources :map_solar_systems, only:[:index]
+  resources :map_system_costs, only:[:index]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # Serve websocket cable requests in-process
