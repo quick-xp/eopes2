@@ -82,7 +82,11 @@ class EstimateMaterial < ActiveRecord::Base
       type_id: type_id)
       .order(:price)
       .first
-    m.price
+    if m == nil
+      0.0
+    else
+      m.price
+    end
   end
 
   def self.refresh_jita_market(materials)

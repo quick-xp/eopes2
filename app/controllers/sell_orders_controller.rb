@@ -3,6 +3,6 @@ class SellOrdersController < ApplicationController
 
   def get_jita_lower_price
     @estimate_material = EstimateMaterial.jita_lower_price(params[:type_id])
-    render json: @estimate_material
+    render json: {price: @estimate_material}
   end
 end
