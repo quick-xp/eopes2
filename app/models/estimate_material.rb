@@ -76,6 +76,7 @@ class EstimateMaterial < ActiveRecord::Base
   end
 
   def self.jita_lower_price(type_id)
+    Market.refresh_market_single("10000002", type_id)
     m = Market.where(
       region_id: "10000002",
       station_id: "60003760",
