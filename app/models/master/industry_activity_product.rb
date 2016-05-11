@@ -17,4 +17,10 @@ class IndustryActivityProduct < ActiveRecord::Base
       .where(typeID: blueprint_type_id, activityID: 1).first
     InvType.where(typeID: product.productTypeID).first
   end
+
+  def self.manufacture_product_quantity(blueprint_type_id)
+    product = IndustryActivityProduct
+      .where(typeID: blueprint_type_id, activityID: 1).first
+    product.quantity
+  end
 end

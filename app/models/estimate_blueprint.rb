@@ -34,4 +34,8 @@ class EstimateBlueprint < ActiveRecord::Base
   def blueprint_product
     IndustryActivityProduct.product_for_production_job(self.type_id)
   end
+
+  def manufacture_product_quantity
+    IndustryActivityProduct.manufacture_product_quantity(self.type_id)
+  end
 end
