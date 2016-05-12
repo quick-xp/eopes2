@@ -61,7 +61,7 @@ class Market < ActiveRecord::Base
     end
     # Refresh 対象のデータ取得
     # マルチプロセスで情報を収集
-    Parallel.each_with_index(refresh_target_lists, in_processes: 6) do |type_id, index|
+    Parallel.each_with_index(refresh_target_lists, in_processes: 2) do |type_id, index|
       ActiveRecord::Base.connection_pool.with_connection do
         #Crest を用いてマーケットデータ取得
         sell_orders = Market.get_market_data(region_id, type_id)
