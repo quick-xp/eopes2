@@ -57,37 +57,39 @@ class Market < ActiveRecord::Base
       if market.nil? ||
           market.updated_at < Time.now - ENV['JITA_PRICE_REFRESH_TIME'].to_i.minutes
         refresh_target_lists << type_id
+        Market.where(region_id: region_id, type_id: type_id).destroy_all
       end
     end
+
     # Refresh 対象のデータ取得
     # マルチプロセスで情報を収集
-    Parallel.each_with_index(refresh_target_lists, in_processes: 2) do |type_id, index|
-      ActiveRecord::Base.connection_pool.with_connection do
-        #Crest を用いてマーケットデータ取得
-        sell_orders = Market.get_market_data(region_id, type_id)
-        Market.destroy_all(region_id: region_id, type_id: type_id)
-        Market.import sell_orders
-      end
+    Parallel.each(refresh_target_lists, in_processes: 6) do |type_id|
+      #Crest を用いてマーケットデータ取得
+      sell_orders = Market.get_market_data(region_id, type_id)
+      Market.import sell_orders
     end
+
+    Market.connection.reconnect!
+
   end
 
   #Market Data Refresh(Single)
   #一定時間以上経過している場合は、Crestからデータを取得、データ入れ替えを行う
   def self.refresh_market_single(region_id, type_id)
-    refresh_target_lists = Array.new
+    lists = Array.new
 
     #Refresh 対象選定
     market = Market.where(:region_id => region_id, :type_id => type_id).first
     if market.nil? ||
         market.updated_at < Time.now - ENV['JITA_PRICE_REFRESH_TIME'].to_i.minutes
-      refresh_target_lists << type_id
+      lists << type_id
     end
 
     # Refresh 対象のデータ取得
-    refresh_target_lists.each_with_index do |type_id, index|
+    lists.each_with_index do |type_id, index|
       #Crest を用いてマーケットデータ取得
       sell_orders = Market.get_market_data(region_id, type_id)
-      Market.destroy_all(region_id: region_id, type_id: type_id)
+      Market.where(region_id: region_id, type_id: type_id).destroy_all
       Market.import sell_orders
     end
   end
