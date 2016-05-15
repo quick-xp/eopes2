@@ -26,7 +26,7 @@ class EstimatesController < ApplicationController
   def create
    @estimate_form = Form::Estimate.new(estimate_params)
    if @estimate_form.save
-     render json: @estimate_form
+     render json: {result: "success", estimate_form: @estimate_form}
    else
      render json: {result: "error", message: @estimate_form.errors.messages}
    end

@@ -19,7 +19,7 @@
 
 class Form::Estimate < Estimate
   REGISTRABLE_ATTRIBUTES = %i(type_id sell_price sell_count product_type_id
-                              total_cost material_total_cost profit total_volume sell_total_price production_time)
+                              total_cost material_total_cost profit total_volume sell_total_price production_time user_id)
 
   has_many :estimate_materials, class_name: 'Form::EstimateMaterial', inverse_of: :estimate, :dependent => :destroy
   has_one :estimate_blueprint, class_name: 'Form::EstimateBlueprint', inverse_of: :estimate, :dependent => :destroy
