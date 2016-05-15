@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "estimate_materials", ["estimate_id"], name: "index_estimate_materials_on_estimate_id", using: :btree
 
   create_table "estimates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT" do |t|
-    t.integer  "type_id"
     t.integer  "user_id"
     t.decimal  "sell_price",          precision: 20, scale: 4
     t.integer  "sell_count"

@@ -3,7 +3,6 @@
 # Table name: estimates
 #
 #  id                  :integer          not null, primary key
-#  type_id             :integer
 #  user_id             :integer
 #  sell_price          :decimal(20, 4)
 #  sell_count          :integer

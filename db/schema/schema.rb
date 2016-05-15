@@ -1,6 +1,5 @@
 create_table "estimates", collate: "utf8_bin", comment: "" do |t|
   t.int "id", primary_key: true, extra: "auto_increment"
-  t.int "type_id", null: true
   t.int "user_id", null: true
   t.decimal "sell_price", null: true, precision: 20, scale: 4
   t.int "sell_count", null: true

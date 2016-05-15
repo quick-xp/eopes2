@@ -8,7 +8,7 @@
 #  station_id :integer
 #  volume     :integer
 #  buy        :boolean
-#  price      :decimal(10, )
+#  price      :decimal(20, 4)
 #  duration   :integer
 #  issued     :datetime
 #  created_at :datetime
