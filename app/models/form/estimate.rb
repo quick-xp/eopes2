@@ -2,9 +2,9 @@ class Form::Estimate < Estimate
   REGISTRABLE_ATTRIBUTES = %i(type_id sell_price sell_count product_type_id
                               total_cost material_total_cost profit total_volume)
 
-  has_many :estimate_materials, class_name: 'Form::EstimateMaterial', :dependent => :destroy
-  has_one :estimate_blueprint, class_name: 'Form::EstimateBlueprint', :dependent => :destroy
-  has_one :estimate_job_cost, class_name: 'Form::EstimateJobCost', :dependent => :destroy
+  has_many :estimate_materials, class_name: 'Form::EstimateMaterial', inverse_of: :estimate, :dependent => :destroy
+  has_one :estimate_blueprint, class_name: 'Form::EstimateBlueprint', inverse_of: :estimate, :dependent => :destroy
+  has_one :estimate_job_cost, class_name: 'Form::EstimateJobCost',inverse_of: :estimate, :dependent => :destroy
 
   accepts_nested_attributes_for :estimate_materials, allow_destroy: true
   accepts_nested_attributes_for :estimate_blueprint, allow_destroy: true
@@ -38,7 +38,7 @@ class Form::Estimate < Estimate
     self.estimate_job_cost.calc_job_cost!
 
     # material init
-    self.estimate_materials = EstimateMaterial.get_material_list(type_id,
+    self.estimate_materials = Form::EstimateMaterial.get_material_list(type_id,
                                                                  me.to_i,
                                                                  te.to_i,
                                                                  runs.to_i)
