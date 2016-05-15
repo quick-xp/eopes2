@@ -38,4 +38,8 @@ class EstimateBlueprint < ActiveRecord::Base
   def manufacture_product_quantity
     IndustryActivityProduct.manufacture_product_quantity(self.type_id)
   end
+
+  def manufacture_product_time
+    IndustryActivity.where(typeID: self.type_id, activityID: 1).first.time
+  end
 end
