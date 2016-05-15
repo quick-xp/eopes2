@@ -23,14 +23,32 @@ class EstimatesController < ApplicationController
     render json: @estimate_form
   end
 
+  def create
+   @estimate_form = Form::Estimate.new(estimate_params)
+   binding.pry
+   if @estimate_form.save
+     render json: @estimate_form
+   else
+     render json: {result: "error", message: @estimate_form.errors.messages}
+   end
+  end
+
   private
 
   def set_estimate
     @project = Estimate.find(params[:id])
   end
 
-  def project_params
-    params.fetch(:project, {})
+  def estimate_params
+    params
+    .require(:estimate)
+    .permit(
+      Form::Estimate::REGISTRABLE_ATTRIBUTES +
+      [estimate_blueprint_attributes: Form::EstimateBlueprint::REGISTRABLE_ATTRIBUTES] +
+      [estimate_materials_attributes: Form::EstimateMaterial::REGISTRABLE_ATTRIBUTES] +
+      [estimate_job_cost_attributes: Form::EstimateJobCost::REGISTRABLE_ATTRIBUTES]
+    )
   end
+
 
 end

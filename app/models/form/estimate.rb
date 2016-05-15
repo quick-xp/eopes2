@@ -2,9 +2,9 @@ class Form::Estimate < Estimate
   REGISTRABLE_ATTRIBUTES = %i(type_id sell_price sell_count product_type_id
                               total_cost material_total_cost profit total_volume)
 
-  has_many :estimate_materials, class_name: 'EstimateMaterial', :dependent => :destroy
-  has_one :estimate_blueprint, class_name: 'EstimateBlueprint', :dependent => :destroy
-  has_one :estimate_job_cost, class_name: 'EstimateJobCost', :dependent => :destroy
+  has_many :estimate_materials, class_name: 'Form::EstimateMaterial', :dependent => :destroy
+  has_one :estimate_blueprint, class_name: 'Form::EstimateBlueprint', :dependent => :destroy
+  has_one :estimate_job_cost, class_name: 'Form::EstimateJobCost', :dependent => :destroy
 
   accepts_nested_attributes_for :estimate_materials, allow_destroy: true
   accepts_nested_attributes_for :estimate_blueprint, allow_destroy: true
