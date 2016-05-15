@@ -25,7 +25,6 @@ class EstimatesController < ApplicationController
 
   def create
    @estimate_form = Form::Estimate.new(estimate_params)
-   binding.pry
    if @estimate_form.save
      render json: @estimate_form
    else
