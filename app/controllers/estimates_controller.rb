@@ -35,7 +35,7 @@ class EstimatesController < ApplicationController
   private
 
   def set_estimate
-    @project = Estimate.find(params[:id])
+    @estimate = Estimate.find(params[:id])
   end
 
   def estimate_params
