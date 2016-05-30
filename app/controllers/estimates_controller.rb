@@ -32,6 +32,19 @@ class EstimatesController < ApplicationController
    end
   end
 
+  def update
+   if @estimate_form.update_attributes(estimate_params)
+     render json: {result: "success", estimate_form: @estimate_form}
+   else
+     render json: {result: "error", message: @estimate_form.errors.messages}
+   end
+  end
+
+  def destroy
+    @estimate.destroy
+    render json: {result: "success"}
+  end
+
   private
 
   def set_estimate
