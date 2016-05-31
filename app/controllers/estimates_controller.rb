@@ -8,7 +8,7 @@ class EstimatesController < ApplicationController
   end
 
   def show
-    render json: @estimate
+    render json: @estimate_form
   end
 
   # 見積もりの初期化
@@ -48,7 +48,7 @@ class EstimatesController < ApplicationController
   private
 
   def set_estimate
-    @estimate = Estimate.find(params[:id])
+    @estimate_form = Form::Estimate.find(params[:id])
   end
 
   def estimate_params
