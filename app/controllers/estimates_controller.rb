@@ -41,7 +41,7 @@ class EstimatesController < ApplicationController
   end
 
   def destroy
-    @estimate.destroy
+    @estimate_form.destroy
     render json: {result: "success"}
   end
 
