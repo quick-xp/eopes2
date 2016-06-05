@@ -27,6 +27,7 @@ gem 'parallel'
 gem 'devise'
 gem 'omniauth'
 gem 'devise_token_auth'
+gem 'omniauth-eveonline'
 
 group :development, :test do
   gem 'pry'
