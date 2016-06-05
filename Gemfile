@@ -24,6 +24,8 @@ gem 'listen'
 # 並列処理
 gem 'parallel'
 
+gem 'devise'
+gem 'omniauth'
 gem 'devise_token_auth'
 
 group :development, :test do

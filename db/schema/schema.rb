@@ -105,31 +105,6 @@ create_table "market_prices", collate: "utf8_bin", comment: "" do |t|
   t.datetime "updated_at", null: true
 end
 
-create_table "users", collate: "utf8_bin", comment: "" do |t|
-  t.int "id", primary_key: true, extra: "auto_increment"
-  t.varchar "email", null: true
-  t.varchar "encrypted_password", default: ""
-  t.varchar "reset_password_token", null: true
-  t.datetime "reset_password_sent_at", null: true
-  t.datetime "remember_created_at", null: true
-  t.int "sign_in_count", default: 0
-  t.datetime "current_sign_in_at", null: true
-  t.datetime "last_sign_in_at", null: true
-  t.varchar "current_sign_in_ip", null: true
-  t.varchar "last_sign_in_ip", null: true
-  t.varchar "provider", null: true
-  t.varchar "uid", null: true
-  t.varchar "name", null: true
-  t.varchar "token", null: true
-  t.varchar "refresh_token", null: true
-  t.datetime "expire", null: true
-  t.datetime "created_at", null: true
-  t.datetime "updated_at", null: true
-
-  t.index "uid", name: "index_users_on_uid", unique: true
-  t.index "reset_password_token", name: "index_users_on_reset_password_token", unique: true
-end
-
 create_table "user_skills", collate: "utf8_bin", comment: "" do |t|
   t.int "id", primary_key: true, extra: "auto_increment"
   t.int "user_id", null: true
