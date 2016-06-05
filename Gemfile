@@ -24,6 +24,8 @@ gem 'listen'
 # 並列処理
 gem 'parallel'
 
+gem 'devise_token_auth'
+
 group :development, :test do
   gem 'pry'
   gem 'pry-doc'
