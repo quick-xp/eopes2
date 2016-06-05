@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount_devise_token_auth_for 'User', at: 'auth'
+  devise_for :users
   resources :estimates do
     collection do
       get 'new'
@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     collection do
       get 'new'
     end
+
+#  mount_devise_token_auth_for 'User', at: 'auth'
   end
 
   resources :sell_orders, only:[:show] do
