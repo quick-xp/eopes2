@@ -1,7 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def eve_online
     #raise request.env['omniauth.auth'].to_yaml
-    binding.pry
     @user = User.find_for_eve_online_oauth(request.env['omniauth.auth'])
     #id,name setting
     session[:user_id] = @user.uid
