@@ -243,7 +243,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   # ==> OmniAuth
-  config.omniauth(:eve_online, ENV['EVE_ONLINE_APP_ID'], ENV['EVE_ONLINE_APP_SECRET'])
+  config.omniauth(:eve_online, ENV['EVE_ONLINE_APP_ID'], ENV['EVE_ONLINE_APP_SECRET'], scope: 'publicData')
 
 
   # ==> Warden configuration
