@@ -35,7 +35,10 @@ module EOPES2
     config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :options, :patch, :delete, :put]
+        resource '*',
+          :headers => :any,
+          :expose => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+          :methods => [:get, :post, :options, :patch, :delete, :put]
       end
     end
 
