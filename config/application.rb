@@ -41,7 +41,7 @@ module EOPES2
           :methods => [:get, :post, :options, :patch, :delete, :put]
       end
     end
-
-    config.api_only = true
+    config.session_store
+    config.api_only = false
   end
 end

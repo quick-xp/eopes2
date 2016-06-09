@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 #  devise_for :users
-  mount_devise_token_auth_for 'User', at: 'auth'
+  mount_devise_token_auth_for 'User', at: '/api/v1/auth'
 
+  namespace :api, defaults: {format: :json} do
+    scope :v1 do
+      resources :users,only: :index
+    end
+  end
   resources :estimates do
     collection do
       get 'new'
